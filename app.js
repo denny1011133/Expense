@@ -13,7 +13,7 @@ app.listen(3000, () => {
 })
 
 const mongoose = require('mongoose') // 載入 mongoose
-mongoose.connect('mongodb://localhost/todo-list', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
+mongoose.connect('mongodb://localhost/Expense', { useNewUrlParser: true, useUnifiedTopology: true }) // 設定連線到 mongoDB
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
