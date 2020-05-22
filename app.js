@@ -30,6 +30,24 @@ app.get('/', (req, res) => {
     })
     .catch(error => console.error(error))
 })
+//首頁過濾分類
+app.post('/', (req, res) => {
+  let totalAmount = 0
+  const categorySelected = req.body.categorySelect
+  if (categorySelected !== "全部") {
+    Record.find({ category: categorySelected })
+      .lean()
+      .then(records => {
+        console.log(records)
+        records.forEach(item => {
+          totalAmount += item.amount
+        })
+        res.render('index', { records, totalAmount })
+      })
+      .catch(error => console.error(error))
+  }
+})
+
 //新增支出頁面
 app.get('/records/new', (req, res) => {
   return res.render('new')

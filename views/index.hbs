@@ -1,4 +1,24 @@
 <div class="container">
+  {{!-- category select --}}
+  <form action="/" method="POST">
+    <div class="row mt-3 justify-content-center">
+      <div class="col-12">
+        <form action="/edit" method="POST">
+          <div class="form-group">
+            <label class="ml-2" for="exampleFormControlInput1" style="font-size: 1.5rem;">支出類型</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="categorySelect" onchange="submit()">
+              <option disabled selected>請選擇</option>
+              <option value="家居物業">家居物業</option>
+              <option value="交通出行">交通出行</option>
+              <option value="休閒娛樂">休閒娛樂</option>
+              <option value="餐飲食品">餐飲食品</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  </form>
   <div>
     <h2>總金額:{{totalAmount}}元</h2>
   </div>
