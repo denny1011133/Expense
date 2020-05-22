@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <h2>總金額:</h2>
+    <h2>總金額:{{totalAmount}}元</h2>
   </div>
   <table class="table  table-hover">
     <tbody>
@@ -11,8 +11,13 @@
         <td>{{this.amount}}元</td>
         <td>{{this.date}}</td>
         <td><button type="button" class="btn "><a href="./records/{{this._id}}/edit">修改</a></button></td>
-        <td><button type="button" class="btn "><a href="./records/{{this._id}}/edit">刪除</a></button></td>
+        <td>
+          <form action="./records/{{ this._id }}/delete" method="POST" style="display: inline;"><button type="submit"
+              class="btn ">刪除</button>
+        </td>
       </tr>
+      <form>
+        </tr>
     </tbody>
     {{/each}}
   </table>

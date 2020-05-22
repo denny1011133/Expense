@@ -21,16 +21,20 @@ app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 //首頁
 app.get('/', (req, res) => {
+  let totalAmount = 0
   Record.find()
     .lean()
-    .then(records => res.render('index', { records }))
+    .then(records => {
+      records.forEach(item => { totalAmount += item.amount })
+      res.render('index', { records, totalAmount })
+    })
     .catch(error => console.error(error))
 })
-//新增資料頁面
+//新增支出頁面
 app.get('/records/new', (req, res) => {
   return res.render('new')
 })
-//新增一筆資料
+//新增一筆支出
 app.post('/records', (req, res) => {
   const { name, category, amount, date } = req.body
   console.log(req.body)
@@ -38,23 +42,30 @@ app.post('/records', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-//修改單筆資料的頁面
+//修改單筆支出頁面
 app.get('/records/:id/edit', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .lean()
-    .then((record) => res.render('edit', { record }))
+    .then(record => res.render('edit', { record }))
     .catch(error => console.log(error))
 })
-//送出修改資料
+//送出修改支出
 app.post('/records/:id/edit', (req, res) => {
   const id = req.params.id
-  const { name, category, amount, date } = req.body
   return Record.findById(id)
     .then(record => {
       record = Object.assign(record, req.body)
       return record.save()
     })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+//刪除單筆支出
+app.post('/records/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
