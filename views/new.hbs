@@ -1,4 +1,4 @@
-<form action="./new" method="POST">
+<form action="/records" method="POST">
   <div class="container" style="width: 50rem;">
     <div class="row justify-content-start  text-center mt-4">
       <h2>請輸入支出</h2>
@@ -16,6 +16,7 @@
       <div class="form-inline">
         <label class="ml-3" for="exampleFormControlInput1">類別</label>
         <select class="form-control ml-4" id="exampleFormControlSelect1" name="category" required='true'>
+          <option disabled selected>請選擇</option>
           <option>家居物業</option>
           <option>交通出行</option>
           <option>休閒娛樂</option>
@@ -41,7 +42,7 @@
     </div>
 
     <div class="row mt-4 justify-content-end">
-      <button type="submit" class="btn btn-success"> 確認送出 </button>
+      <button type="submit" class="btn btn-success">確認送出</button>
     </div>
   </div>
   </div>
