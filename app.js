@@ -38,6 +38,26 @@ app.post('/records', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+//修改單筆資料的頁面
+app.get('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .lean()
+    .then((record) => res.render('edit', { record }))
+    .catch(error => console.log(error))
+})
+//送出修改資料
+app.post('/records/:id/edit', (req, res) => {
+  const id = req.params.id
+  const { name, category, amount, date } = req.body
+  return Record.findById(id)
+    .then(record => {
+      record = Object.assign(record, req.body)
+      return record.save()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 app.listen(3000, () => {
   console.log('App is running on http://localhost:3000')
 })
