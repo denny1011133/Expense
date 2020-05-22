@@ -1,1 +1,25 @@
-<h2>Hello world! 這是 index</h2>
+<div class="container">
+  <div>
+    <h2>總金額:</h2>
+  </div>
+  <table class="table  table-hover">
+    <tbody>
+      {{#each records}}
+      <tr>
+        <td>{{this.name}}</td>
+        <td>{{{this.category}}}</td>
+        <td>{{this.amount}}元</td>
+        <td>{{this.date}}</td>
+        <td><button type="button" class="btn btn-info">修改</button></td>
+        <td><button type="button" class="btn btn-info">刪除</button></td>
+      </tr>
+    </tbody>
+    {{/each}}
+  </table>
+  <div class="row justify-content-center mr-4 mt-4 mb-4">
+    <form action="./record/new" method="GET">
+      <button type="submit" class="btn btn-success">新增支出</button>
+    </form>
+  </div>
+</div>
+</div>
