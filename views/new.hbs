@@ -1,0 +1,48 @@
+<form action="./new" method="POST">
+  <div class="container" style="width: 50rem;">
+    <div class="row justify-content-start  text-center mt-4">
+      <h2>請輸入支出</h2>
+    </div>
+
+    <div class="row mt-4 justify-content-start">
+      <div class="form-inline">
+        <label class="ml-3 mr-2" for="exampleInputEmail1">名稱</label>
+        <input class="ml-3" type="name" class="form-control form-control-lg" id="exampleInputEmail1"
+          aria-describedby="emailHelp" name="name" placeholder=" 請輸入該筆支出名稱" style="width: 400px;" required='true'>
+      </div>
+    </div>
+
+    <div class="row mt-4 justify-content-start">
+      <div class="form-inline">
+        <label class="ml-3" for="exampleFormControlInput1">類別</label>
+        <select class="form-control ml-4" id="exampleFormControlSelect1" name="category" required='true'>
+          <option>家居物業</option>
+          <option>交通出行</option>
+          <option>休閒娛樂</option>
+          <option>餐飲食品</option>
+          <option>其他</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row mt-4 justify-content-start">
+      <label for="example-date-input" class="col-1 col-form-label mr-4">日期</label>
+      <div class="col-10">
+        <input class="form-control" type="date" id="example-date-input" name="date" required='true'>
+      </div>
+    </div>
+
+    <div class="form-group row row mt-4 justify-content-start">
+      <label for="example-number-input" class="mr-4 col-1 col-form-label">金額</label>
+      <div class="col-10">
+        <input class="form-control" type="number" id="example-number-input" name="amount" required='true'
+          style="width: 400px;">
+      </div>
+    </div>
+
+    <div class="row mt-4 justify-content-end">
+      <button type="submit" class="btn btn-success"> 確認送出 </button>
+    </div>
+  </div>
+  </div>
+</form>
