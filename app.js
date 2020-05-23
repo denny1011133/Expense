@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars');
 const Record = require('./models/record')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const app = express()
+
 mongoose.connect('mongodb://localhost/Expense', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
@@ -18,18 +20,21 @@ db.once('open', () => {
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(methodOverride('_method'))
 //首頁
 app.get('/', (req, res) => {
   let totalAmount = 0
   Record.find()
     .lean()
     .then(records => {
-      records.forEach(item => { totalAmount += item.amount })
+      records.forEach(record => { totalAmount += record.amount })
       res.render('index', { records, totalAmount })
     })
     .catch(error => console.error(error))
 })
+
 //首頁過濾分類
 app.post('/', (req, res) => {
   let totalAmount = 0
@@ -37,20 +42,19 @@ app.post('/', (req, res) => {
   Record.find({ category: categorySelected })
     .lean()
     .then(records => {
-      console.log(records)
-      records.forEach(item => {
-        totalAmount += item.amount
+      records.forEach(record => {
+        totalAmount += record.amount
       })
       res.render('index', { records, totalAmount })
     })
     .catch(error => console.error(error))
-
 })
 
 //新增支出頁面
 app.get('/records/new', (req, res) => {
   return res.render('new')
 })
+
 //新增一筆支出
 app.post('/records', (req, res) => {
   const { name, category, amount, date } = req.body
@@ -59,6 +63,7 @@ app.post('/records', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
 //修改單筆支出頁面
 app.get('/records/:id/edit', (req, res) => {
   const id = req.params.id
@@ -67,8 +72,9 @@ app.get('/records/:id/edit', (req, res) => {
     .then(record => res.render('edit', { record }))
     .catch(error => console.log(error))
 })
+
 //送出修改支出
-app.post('/records/:id/edit', (req, res) => {
+app.put('/records/:id', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .then(record => {
@@ -78,8 +84,9 @@ app.post('/records/:id/edit', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
 //刪除單筆支出
-app.post('/records/:id/delete', (req, res) => {
+app.delete('/records/:id', (req, res) => {
   const id = req.params.id
   return Record.findById(id)
     .then(record => record.remove())
