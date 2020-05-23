@@ -8,27 +8,27 @@ db.on('error', () => {
 db.once('open', () => {
   Record.create({
     name: "午餐",
-    category: '餐飲食品',
+    category: '<i class="fas fa-utensils"></i>',
     date: "2019/04/23",
     amount: 60,
   }, {
     name: "晚餐",
-    category: '家居物業',
+    category: '<i class="fas fa-utensils"></i>',
     date: "2019/04/23",
     amount: 60,
   }, {
     name: "捷運",
-    category: '交通出行',
+    category: '<i class="fas fa-shuttle-van"></i>',
     date: "2019/04/23",
     amount: 120,
   }, {
     name: "電影: 驚奇隊長",
-    category: '休閒娛樂',
+    category: '<i class="fas fa-grin-beam"></i>',
     date: "2019/04/23",
     amount: 220,
   }, {
     name: "租金",
-    category: '家居物業',
+    category: '<i class="fas fa-home"></i>',
     date: "2019/04/01",
     amount: 25000,
   })

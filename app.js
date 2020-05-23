@@ -34,18 +34,17 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   let totalAmount = 0
   const categorySelected = req.body.categorySelect
-  if (categorySelected !== "全部") {
-    Record.find({ category: categorySelected })
-      .lean()
-      .then(records => {
-        console.log(records)
-        records.forEach(item => {
-          totalAmount += item.amount
-        })
-        res.render('index', { records, totalAmount })
+  Record.find({ category: categorySelected })
+    .lean()
+    .then(records => {
+      console.log(records)
+      records.forEach(item => {
+        totalAmount += item.amount
       })
-      .catch(error => console.error(error))
-  }
+      res.render('index', { records, totalAmount })
+    })
+    .catch(error => console.error(error))
+
 })
 
 //新增支出頁面
