@@ -29,7 +29,7 @@ router.get('/:id/edit', (req, res) => {
   return Record.findById(id)
     .lean()
     .then(record => {
-      let categoryInChineseSelected = categoryInChinese[record.category]
+      const categoryInChineseSelected = categoryInChinese[record.category]
       res.render('edit', { record, categoryInChineseSelected })
     })
     .catch(error => console.log(error))
