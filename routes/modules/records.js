@@ -19,9 +19,19 @@ router.post('/', (req, res) => {
 //修改單筆支出頁面
 router.get('/:id/edit', (req, res) => {
   const id = req.params.id
+  const categoryInChinese = {
+    '<i class="fas fa-home"></i>': "家居物業",
+    '<i class="fas fa-shuttle-van"></i>': "交通出行",
+    '<i class="fas fa-grin-beam"></i>': "休閒娛樂",
+    '<i class="fas fa-utensils"></i>': "餐飲食品",
+    '<i class="fas fa-pen"></i>': "其他"
+  }
   return Record.findById(id)
     .lean()
-    .then(record => res.render('edit', { record }))
+    .then(record => {
+      let categoryInChineseSelected = categoryInChinese[record.category]
+      res.render('edit', { record, categoryInChineseSelected })
+    })
     .catch(error => console.log(error))
 })
 
