@@ -40,8 +40,9 @@ router.put('/:id', (req, res) => {
 //刪除單筆支出
 router.delete('/:id', (req, res) => {
   const id = req.params.id
-  return Record.findById(id)
+  Record.findById(id)
     .then(record => record.remove())
+    .then(record => console.log(record))
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
