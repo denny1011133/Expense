@@ -24,15 +24,25 @@ router.post('/', (req, res) => {
     '<i class="fas fa-pen"></i>': "其他"
   }
   const categorySelected = req.body.categorySelect
-  Record.find({ category: categorySelected })
+  if (categorySelected !== "ALL") {
+    Record.find({ category: categorySelected })
+      .lean()
+      .then(records => {
+        const categoryInChineseSelected = categoryInChinese[categorySelected]
+        records.forEach(record => {
+          totalAmount += record.amount
+        })
+        res.render('index', { records, totalAmount, categoryInChineseSelected })
+      })
+      .catch(error => console.error(error))
+  } else Record.find()
     .lean()
     .then(records => {
-      const categoryInChineseSelected = categoryInChinese[categorySelected]
-      records.forEach(record => {
-        totalAmount += record.amount
-      })
+      const categoryInChineseSelected = "所有支出"
+      records.forEach(record => totalAmount += record.amount)
       res.render('index', { records, totalAmount, categoryInChineseSelected })
     })
     .catch(error => console.error(error))
+
 })
 module.exports = router
