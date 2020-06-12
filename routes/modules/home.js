@@ -24,10 +24,12 @@ router.post('/', (req, res) => {
     '<i class="fas fa-pen"></i>': "其他"
   }
   const categorySelected = req.body.categorySelect
+  //篩選分類
   if (categorySelected !== "ALL") {
     Record.find({ category: categorySelected })
       .lean()
       .then(records => {
+        console.log(records)
         const categoryInChineseSelected = categoryInChinese[categorySelected]
         records.forEach(record => {
           totalAmount += record.amount
@@ -44,5 +46,16 @@ router.post('/', (req, res) => {
     })
     .catch(error => console.error(error))
 
+  // //篩選月份
+  // const monthSelected = req.body.month //2019-01
+  // console.log(monthSelected)
+  // Record.find()
+  //   .lean()
+  //   .then(records => {
+  //     console.log(records)
+  //     records.filter(exp => exp.date.includes(monthSelected))
+  //   })
+  //   .then(exp => res.render('index', { exp }))
+  //   .catch(error => console.log(error))
 })
 module.exports = router

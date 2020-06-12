@@ -9,9 +9,8 @@ router.get('/new', (req, res) => {
 
 //新增一筆支出
 router.post('/', (req, res) => {
-  const { name, category, amount, date } = req.body
-  console.log(req.body)
-  return Record.create({ name, category, amount, date })
+  const { name, merchant, category, amount, date } = req.body
+  return Record.create({ name, merchant, category, amount, date })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })

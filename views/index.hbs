@@ -2,20 +2,23 @@
   <form action="/" method="POST">
     <div class="row mt-3 justify-content-center">
       <div class="col-12">
-        <form action="/edit" method="POST">
-          <div class="form-group">
-            <label class="ml-2" for="exampleFormControlInput1" style="font-size: 1.5rem;">支出類型</label>
-            <select class="form-control" id="exampleFormControlSelect1" name="categorySelect" onchange="submit()">
-              <option disabled selected>{{categoryInChineseSelected}}</option>
-              <option value='ALL'>所有支出</i> </option>
-              <option value='<i class="fas fa-home"></i>'>家居物業</i> </option>
-              <option value='<i class="fas fa-shuttle-van"></i>'>交通出行</option>
-              <option value='<i class="fas fa-grin-beam"></i>'>休閒娛樂</option>
-              <option value='<i class="fas fa-utensils"></i>'>餐飲食品</option>
-              <option value='<i class="fas fa-pen"></i>'>其他</option>
-            </select>
-          </div>
-        </form>
+        <div class="form-group">
+          <label class="ml-2" for="exampleFormControlInput1" style="font-size: 1.5rem;">支出類型</label>
+          <select class="form-control" id="exampleFormControlSelect1" name="categorySelect" onchange="submit()">
+            <option disabled selected>{{categoryInChineseSelected}}</option>
+            <option value='ALL'>所有支出</i> </option>
+            <option value='<i class="fas fa-home"></i>'>家居物業</i> </option>
+            <option value='<i class="fas fa-shuttle-van"></i>'>交通出行</option>
+            <option value='<i class="fas fa-grin-beam"></i>'>休閒娛樂</option>
+            <option value='<i class="fas fa-utensils"></i>'>餐飲食品</option>
+            <option value='<i class="fas fa-pen"></i>'>其他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="ml-2" for="exampleFormControlInput1" style="font-size: 1.5rem;">月份</label>
+          <input class="form-control ml-3" type="month" name="month" id="month" value="{{{queriedMonth}}}"
+            onchange="this.form.submit()">
+        </div>
       </div>
     </div>
   </form>
@@ -27,6 +30,7 @@
       {{#each records}}
       <tr>
         <td>{{this.name}}</td>
+        <td>{{this.merchant}}</td>
         <td>{{{this.category}}}</td>
         <td>{{this.amount}}元</td>
         <td>{{this.date}}</td>
@@ -43,3 +47,4 @@
   </div>
 </div>
 </div>
+{{exp}}

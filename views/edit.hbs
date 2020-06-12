@@ -15,6 +15,15 @@
 
     <div class="row mt-4 justify-content-start">
       <div class="form-inline">
+        <label class="ml-3 mr-2" for="exampleInputEmail1">商家</label>
+        <input class="ml-3" type="merchant"" class=" form-control form-control-lg" id="exampleInputEmail1"
+          aria-describedby="emailHelp" name="merchant" style="width: 400px;" required='true'
+          value="{{record.merchant}}">
+      </div>
+    </div>
+
+    <div class="row mt-4 justify-content-start">
+      <div class="form-inline">
         <label class="ml-3" for="exampleFormControlInput1">類別</label>
         <select class="form-control ml-4" id="exampleFormControlSelect1" name="category" required='true'>
           <option selected disabled>{{categoryInChineseSelected}}</option>
