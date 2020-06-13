@@ -9,15 +9,17 @@ router.get('/new', (req, res) => {
 
 //新增一筆支出
 router.post('/', (req, res) => {
+  const userId = req.user._id
   const { name, merchant, category, amount, date } = req.body
-  return Record.create({ name, merchant, category, amount, date })
+  return Record.create({ name, merchant, category, amount, date, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
 //修改單筆支出頁面
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   const categoryInChinese = {
     '<i class="fas fa-home"></i>': "家居物業",
     '<i class="fas fa-shuttle-van"></i>': "交通出行",
@@ -25,7 +27,7 @@ router.get('/:id/edit', (req, res) => {
     '<i class="fas fa-utensils"></i>': "餐飲食品",
     '<i class="fas fa-pen"></i>': "其他"
   }
-  return Record.findById(id)
+  return Record.findOne({ _id, userId })
     .lean()
     .then(record => {
       const categoryInChineseSelected = categoryInChinese[record.category]
@@ -36,8 +38,9 @@ router.get('/:id/edit', (req, res) => {
 
 //送出修改支出
 router.put('/:id', (req, res) => {
-  const id = req.params.id
-  return Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Record.findOne({ _id, userId })
     .then(record => {
       record = Object.assign(record, req.body)
       return record.save()
@@ -48,8 +51,9 @@ router.put('/:id', (req, res) => {
 
 //刪除單筆支出
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(record => console.log(record))
     .then(() => res.redirect('/'))

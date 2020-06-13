@@ -4,8 +4,9 @@ const Record = require('../../models/record')
 
 //首頁
 router.get('/', (req, res) => {
+  const userId = req.user._id
   let totalAmount = 0
-  Record.find()
+  Record.find({ userId })
     .lean()
     .then(records => {
       records.forEach(record => totalAmount += record.amount)
@@ -15,6 +16,7 @@ router.get('/', (req, res) => {
 })
 //首頁過濾分類
 router.post('/', (req, res) => {
+  const userId = req.user._id
   let totalAmount = 0
   const categoryInChinese = {
     '<i class="fas fa-home"></i>': "家居物業",
@@ -26,7 +28,7 @@ router.post('/', (req, res) => {
   const categorySelected = req.body.categorySelect
   //篩選分類
   if (categorySelected !== "ALL") {
-    Record.find({ category: categorySelected })
+    Record.find({ category: categorySelected, userId })
       .lean()
       .then(records => {
         console.log(records)
@@ -37,7 +39,7 @@ router.post('/', (req, res) => {
         res.render('index', { records, totalAmount, categoryInChineseSelected })
       })
       .catch(error => console.error(error))
-  } else Record.find()
+  } else Record.find({ userId })
     .lean()
     .then(records => {
       const categoryInChineseSelected = "所有支出"
