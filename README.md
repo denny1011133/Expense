@@ -45,9 +45,9 @@ FACEBOOK_CALLBACK=<YOUR_FACEBOOK_REDIRECT_URI>
 開啟網頁輸入: http://localhost:3000
 ```
 ## 測試帳號
-  name: Jack
-  email: Jack@example.com
-  password: 123456
+  name: Jack;
+  email: Jack@example.com;
+  password: 123456;
 
 ## 功能
 可以瀏覽所有支出的明細及總金額
