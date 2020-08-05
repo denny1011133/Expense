@@ -1,6 +1,7 @@
 # 個人記帳本
 這是一個簡單又好用的記帳Web App，幫助你記錄生活的任何開銷!
 
+![1](https://i.imgur.com/rF2Mc3k.png)
 ## 基礎環境設定
 利用[Node.js](https://nodejs.org/en/)建立伺服器  
 利用[mongodb](https://www.mongodb.com/)搭配[Robo 3T](https://robomongo.org/)建立資料庫
